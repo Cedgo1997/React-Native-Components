@@ -8,8 +8,8 @@ import { styles } from '../theme/appTheme';
 
 
 const menuItems: MenuItem[] = [
-    { name: 'Animation 101', icon: 'cube-outline', component: 'Animation101Screen' },
-    { name: 'Animation 102', icon: 'albums-outline', component: 'Animation102Screen' },
+    { name: 'Animation 101', icon: 'cube-outline', component: 'Animation101' },
+    { name: 'Animation 102', icon: 'albums-outline', component: 'Animation102' },
 ]
 
 export const HomeScreen = () => {
