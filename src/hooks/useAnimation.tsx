@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { Animated, Easing } from "react-native";
+import { Animated, PanResponder } from "react-native";
 
 export const useAnimation = () => {
 
+    /* Fade and opacity */
     const { current: opacity } = useRef(new Animated.Value(0));
     const { current: position } = useRef(new Animated.Value(0));
 
@@ -32,11 +33,39 @@ export const useAnimation = () => {
         }).start();
     }
 
+    /* PanResponder, Drag */
+    const { current: pan } = useRef(new Animated.ValueXY());
+
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onPanResponderMove: Animated.event([
+            null,
+            {
+                dx: pan.x,
+                dy: pan.y,
+            },
+
+        ], {
+            useNativeDriver: false
+        }),
+        onPanResponderRelease: () => {
+            Animated.spring(
+                pan,
+                {
+                    toValue: { x: 0, y: 0 },
+                    useNativeDriver: true
+                },
+            ).start()
+        }
+    })
+
     return {
         opacity,
         position,
         fadeIn,
         fadeOut,
-        startMoving
+        startMoving,
+        pan,
+        panResponder
     };
 };

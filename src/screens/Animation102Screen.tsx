@@ -1,32 +1,10 @@
 import React, { useRef } from 'react';
-import { Animated, Button, PanResponder, StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
+import { useAnimation } from '../hooks/useAnimation';
 
 export const Animation102Screen = () => {
 
-    const { current: pan } = useRef(new Animated.ValueXY());
-
-    const panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onPanResponderMove: Animated.event([
-            null,
-            {
-                dx: pan.x,
-                dy: pan.y,
-            },
-
-        ], {
-            useNativeDriver: false
-        }),
-        onPanResponderRelease: () => {
-            Animated.spring(
-                pan,
-                {
-                    toValue: { x: 0, y: 0 },
-                    useNativeDriver: true
-                },
-            ).start()
-        }
-    })
+    const { pan, panResponder } = useAnimation();
 
     return (
         <View style={styles.container}>
