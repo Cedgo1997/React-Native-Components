@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     switchRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginVertical: 8
     }
 });

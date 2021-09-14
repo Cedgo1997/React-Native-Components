@@ -14,7 +14,7 @@ export const CustomSwitch = ({ isOn, onChange }: Props) => {
     };
     return (
         <Switch
-            trackColor={{ false: "#D9D9DB", true: "#5856D6" }}
+            trackColor={{ false: "#D9D9DB", true: "#D9D9DB" }}
             thumbColor={isEnabled ? "#5856D6" : "#f4f3f4"}
             onValueChange={toggleSwitch}
             value={isEnabled}

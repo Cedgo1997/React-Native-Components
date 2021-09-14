@@ -18,7 +18,7 @@ export const FlatListMenuItem = ({ menuItem }: Props) => {
                 <Icon name={menuItem.icon} size={20} />
                 <Text style={styles.textItem}>{menuItem.name}</Text>
                 <View style={{ flex: 1 }} />
-                <Icon name="arrow-forward-circle-outline" size={25} />
+                <Icon name="caret-forward-outline" color="grey" size={25} />
             </View>
         </TouchableOpacity>
     );
