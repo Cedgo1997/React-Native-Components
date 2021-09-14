@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { styles } from '../theme/appTheme';
 
@@ -20,31 +20,43 @@ export const TextInputScreen = () => {
     }
 
     return (
-        <View style={styles.globalMargin}>
-            <HeaderTitle title="Text Input" />
-            <TextInput
-                style={stylesText.textInput}
-                placeholder='Name'
-                autoCorrect={false}
-                autoCapitalize='words'
-                onChangeText={(value) => onChange(value, 'name')}
-            />
-            <TextInput
-                style={stylesText.textInput}
-                placeholder='Email'
-                autoCorrect={false}
-                autoCapitalize='none'
-                keyboardType='email-address'
-                onChangeText={(value) => onChange(value, 'email')}
-            />
-            <TextInput
-                style={stylesText.textInput}
-                placeholder='Number'
-                keyboardType='numeric'
-                onChangeText={(value) => onChange(value, 'number')}
-            />
-            <Text style={{ fontSize: 18 }}>{JSON.stringify(form, null, 3)}</Text>
-        </View>
+
+        /* To show input while keyboard is on */
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
+            <ScrollView>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.globalMargin}>
+                        <HeaderTitle title="Text Input" />
+                        <TextInput
+                            style={stylesText.textInput}
+                            placeholder='Name'
+                            autoCorrect={false}
+                            autoCapitalize='words'
+                            onChangeText={(value) => onChange(value, 'name')}
+                        />
+                        <TextInput
+                            style={stylesText.textInput}
+                            placeholder='Email'
+                            autoCorrect={false}
+                            autoCapitalize='none'
+                            keyboardType='email-address'
+                            onChangeText={(value) => onChange(value, 'email')}
+                        />
+                        <TextInput
+                            style={stylesText.textInput}
+                            placeholder='Number'
+                            keyboardType='numeric'
+                            onChangeText={(value) => onChange(value, 'number')}
+                        />
+                        <Text style={{ fontSize: 18 }}>{JSON.stringify(form, null, 3)}</Text>
+                    </View>
+                    {/* To scroll while input is visible with and keyboard */}
+                </TouchableWithoutFeedback>
+                <View style={{ height: 50 }} />
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 };
 
