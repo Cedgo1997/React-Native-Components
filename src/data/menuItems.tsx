@@ -8,4 +8,5 @@ export const menuItems: MenuItem[] = [
     { name: 'TextInput', icon: 'document-text-outline', component: 'TextInput' },
     { name: 'PullToRefresh', icon: 'refresh-circle-outline', component: 'PullToRefresh' },
     { name: 'SectionList', icon: 'list-outline', component: 'SectionList' },
+    { name: 'Modal', icon: 'tablet-landscape-outline', component: 'Modal' },
 ]
