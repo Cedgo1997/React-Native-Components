@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Animated, PanResponder } from "react-native";
 
-export const useAnimation = () => {
+export const useAnimation = (duration: number = 300) => {
 
     /* Fade and opacity */
     const { current: opacity } = useRef(new Animated.Value(0));
@@ -10,7 +10,7 @@ export const useAnimation = () => {
     const fadeIn = () => {
         Animated.timing(opacity, {
             toValue: 1,
-            duration: 300,
+            duration,
             useNativeDriver: true
         }).start();
     }
