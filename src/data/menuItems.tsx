@@ -9,4 +9,5 @@ export const menuItems: MenuItem[] = [
     { name: 'PullToRefresh', icon: 'refresh-circle-outline', component: 'PullToRefresh' },
     { name: 'SectionList', icon: 'list-outline', component: 'SectionList' },
     { name: 'Modal', icon: 'tablet-landscape-outline', component: 'Modal' },
+    { name: 'InfiniteScroll', icon: 'filter-outline', component: 'InfiniteScroll' },
 ]
