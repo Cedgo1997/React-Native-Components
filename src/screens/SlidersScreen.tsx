@@ -1,15 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { StackScreenProps } from '@react-navigation/stack';
+import React, { useState } from 'react';
+import { Animated, Dimensions, Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Slide, sliderItems } from '../data/sliderData';
+import { useAnimation } from '../hooks/useAnimation';
 
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
+const { width: screenWidth } = Dimensions.get('screen');
 
-export const SlidersScreen = () => {
+interface Props extends StackScreenProps<any, any> { };
+export const SlidersScreen = ({ navigation }: Props) => {
 
     const [slideIndex, setSlideIndex] = useState(0);
+    const { opacity, fadeIn, fadeOut } = useAnimation();
 
     const renderItem = (item: Slide) => {
         return (
@@ -29,21 +34,54 @@ export const SlidersScreen = () => {
 
     const pagination = () => {
         return (
-            <Pagination
-                dotsLength={sliderItems.length}
-                activeDotIndex={slideIndex}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
-                dotStyle={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 5,
-                    marginHorizontal: 8,
-                    backgroundColor: 'rgba(255, 255, 255, 0.92)'
-                }}
-                inactiveDotOpacity={0.4}
-                inactiveDotScale={0.6}
-            />
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginHorizontal: 20,
+                alignItems: 'center',
+            }}>
+                <Pagination
+                    dotsLength={sliderItems.length}
+                    activeDotIndex={slideIndex}
+                    dotStyle={{
+                        width: 10,
+                        height: 10,
+                        borderRadius: 5,
+                        marginHorizontal: 8,
+                        backgroundColor: 'black'
+                    }}
+                    inactiveDotOpacity={0.4}
+                    inactiveDotScale={0.6}
+                />
+                <Animated.View style={{ opacity }}>
+                    <TouchableOpacity style={{
+                        flexDirection: 'row',
+                        backgroundColor: '#5856D6',
+                        width: 140,
+                        height: 50,
+                        borderRadius: 10,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                        activeOpacity={0.8}
+                        disabled={slideIndex === sliderItems.length - 1 ? false : true}
+                        onPress={() => navigation.navigate('Home')}
+                    >
+                        <Text style={{ fontSize: 25, color: 'white' }}>Entrar</Text>
+                        <Icon
+                            name='chevron-forward-outline'
+                            color='white'
+                            size={40}
+                        />
+                    </TouchableOpacity>
+                </Animated.View>
+            </View>
         );
+    }
+
+    const slideShow = (index: number) => {
+        setSlideIndex(index);
+        index === sliderItems.length - 1 ? fadeIn() : fadeOut();
     }
 
     return (
@@ -55,7 +93,7 @@ export const SlidersScreen = () => {
                 renderItem={({ item }) => renderItem(item)}
                 sliderWidth={screenWidth}
                 itemWidth={screenWidth}
-                onSnapToItem={(index) => setSlideIndex(index)}
+                onSnapToItem={(index) => slideShow(index)}
             />
             {pagination()}
         </SafeAreaView>
