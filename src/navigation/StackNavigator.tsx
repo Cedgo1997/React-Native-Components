@@ -10,6 +10,7 @@ import { PullToRefresh } from '../screens/PullToRefresh';
 import { SectionListScreen } from '../screens/SectionListScreen';
 import { ModalScreen } from '../screens/ModalScreen';
 import { InfiniteScrollScreen } from '../screens/InfiniteScrollScreen';
+import { SlidersScreen } from '../screens/SlidersScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ export const StackNavigator = () => {
             <Stack.Screen name="SectionList" component={SectionListScreen} />
             <Stack.Screen name="Modal" component={ModalScreen} />
             <Stack.Screen name="InfiniteScroll" component={InfiniteScrollScreen} />
+            <Stack.Screen name="Slides" component={SlidersScreen} />
         </Stack.Navigator>
     );
 }
