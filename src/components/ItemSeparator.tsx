@@ -1,9 +1,10 @@
 import { useTheme } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from "react-native";
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 export const ItemSeparator = () => {
-    const { colors } = useTheme();
+    const { theme } = useContext(ThemeContext);
     return (
         <View
             style={
@@ -11,6 +12,7 @@ export const ItemSeparator = () => {
                     marginVertical: 10,
                     borderBottomWidth: 2,
                     opacity: 0.4,
+                    borderColor: theme.dividerColor
                 }
             } />
     )

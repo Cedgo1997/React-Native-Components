@@ -7,28 +7,50 @@ import { styles } from '../theme/appTheme';
 
 export const ChangeThemeScreen = () => {
 
-    const { setDarkTheme, setLightTheme } = useContext(ThemeContext);
+    const { setDarkTheme, setLightTheme, theme: { colors } } = useContext(ThemeContext);
 
     return (
         <View style={styles.globalMargin}>
             <HeaderTitle title='Theme' />
-            <TouchableOpacity
-            onPress={setDarkTheme}
-                activeOpacity={0.8}
-                style={{
-                    backgroundColor: '#5856D6',
-                    width: 150,
-                    height: 50,
-                    justifyContent: 'center',
-                    borderRadius: 20,
-                }}>
-                <Text style={{
-                    color: 'white',
-                    textAlign: 'center',
-                    fontSize: 20,
-                    fontWeight: 'bold'
-                }} >Light / Dark</Text>
-            </TouchableOpacity>
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+            }}>
+                <TouchableOpacity
+                    onPress={setDarkTheme}
+                    activeOpacity={0.8}
+                    style={{
+                        backgroundColor: colors.primary,
+                        width: 150,
+                        height: 50,
+                        justifyContent: 'center',
+                        borderRadius: 20,
+                    }}>
+                    <Text style={{
+                        color: 'white',
+                        textAlign: 'center',
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }} >Dark</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={setLightTheme}
+                    activeOpacity={0.8}
+                    style={{
+                        backgroundColor: colors.primary,
+                        width: 150,
+                        height: 50,
+                        justifyContent: 'center',
+                        borderRadius: 20,
+                    }}>
+                    <Text style={{
+                        color: 'white',
+                        textAlign: 'center',
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }} >Light</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
