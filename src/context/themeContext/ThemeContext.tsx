@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
+import { Appearance, AppState } from "react-native";
 import { lightTheme, themeReducer, ThemeState } from "./themeReducer";
 
 interface ThemeContextProps {
@@ -12,6 +13,12 @@ export const ThemeContext = createContext({} as ThemeContextProps);
 export const ThemeProvider = ({ children }: any) => {
 
     const [theme, dispatch] = useReducer(themeReducer, lightTheme); // TODO necesito leer el tema global del tlf
+
+    useEffect(() => {
+        AppState.addEventListener('change', (status) => {
+            status === 'active' ? Appearance.getColorScheme() === 'light' ? setLightTheme() : setDarkTheme() : false;
+        })
+    }, []);
 
     const setDarkTheme = () => {
         dispatch({ type: 'set_dark_theme' });
