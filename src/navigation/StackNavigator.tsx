@@ -11,6 +11,7 @@ import { SectionListScreen } from '../screens/SectionListScreen';
 import { ModalScreen } from '../screens/ModalScreen';
 import { InfiniteScrollScreen } from '../screens/InfiniteScrollScreen';
 import { SlidersScreen } from '../screens/SlidersScreen';
+import { ChangeThemeScreen } from '../screens/ChangeThemeScreen';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ export const StackNavigator = () => {
             <Stack.Screen name="Modal" component={ModalScreen} />
             <Stack.Screen name="InfiniteScroll" component={InfiniteScrollScreen} />
             <Stack.Screen name="Slides" component={SlidersScreen} />
+            <Stack.Screen name="ChangeTheme" component={ChangeThemeScreen} />
         </Stack.Navigator>
     );
 }
